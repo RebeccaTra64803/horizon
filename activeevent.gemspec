@@ -8,8 +8,8 @@ Gem::Specification.new do |spec|
   spec.version       = Activeevent::VERSION
   spec.authors       = ["Aaron Jensen"]
   spec.email         = ["aaronjensen@gmail.com"]
-  spec.description   = %q{TODO: Write a gem description}
-  spec.summary       = %q{TODO: Write a gem summary}
+  spec.description   = %q{activeevent}
+  spec.summary       = %q{activeevent}
   spec.homepage      = ""
   spec.license       = "MIT"
 
