@@ -1,5 +1,1 @@
-require "activeevent/version"
-
-module Activeevent
-  # Your code goes here...
-end
+require "active_event"
