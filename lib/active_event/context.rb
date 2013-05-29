@@ -1,7 +1,14 @@
+require 'active_event/thread_local_context_factory'
+
 module ActiveEvent
   class Context
+    attr_reader :factory
+    def self.factory
+      @factory ||= ThreadLocalContextFactory.new
+    end
+
     def self.current
-      @current ||= Context.new
+      factory.current_context
     end
 
     def event_map

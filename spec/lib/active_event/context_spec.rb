@@ -1,5 +1,5 @@
 require 'spec_helper'
-require 'active_event/handler_context'
+require 'active_event/context'
 
 describe ActiveEvent::Context do
   let(:context) { ActiveEvent::Context.new }
@@ -19,5 +19,14 @@ describe ActiveEvent::Context do
     context.publish(:my_other_event, 4)
 
     handler.should_not have_received(:handle)
+  end
+
+  it 'defaults to dispatching thread local contexts' do
+    context = ActiveEvent::Context.current
+    ActiveEvent::Context.current.should == context
+
+    thread = Thread.new { ActiveEvent::Context.current.should_not == context }
+
+    thread.join
   end
 end
