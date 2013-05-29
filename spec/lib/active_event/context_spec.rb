@@ -21,20 +21,29 @@ describe ActiveEvent::Context do
     handler.should_not have_received(:handle)
   end
 
-  it 'defaults to dispatching thread local contexts' do
-    context = ActiveEvent::Context.current
+  describe '.current' do
+    it 'defaults to dispatching thread local contexts' do
+      context = ActiveEvent::Context.current
 
-    ActiveEvent::Context.current.should == context
-    thread = Thread.new { ActiveEvent::Context.current.should_not == context }
-    thread.join
-  end
+      ActiveEvent::Context.current.should == context
+      thread = Thread.new { ActiveEvent::Context.current.should_not == context }
+      thread.join
+    end
 
-  it 'can reset the current context' do
-    context = ActiveEvent::Context.current
+    it 'can be reset' do
+      context = ActiveEvent::Context.current
 
-    ActiveEvent::Context.reset!
+      ActiveEvent::Context.reset!
 
-    ActiveEvent::Context.current.should be
-    ActiveEvent::Context.current.should_not == context
+      ActiveEvent::Context.current.should be
+      ActiveEvent::Context.current.should_not == context
+    end
+
+    it 'can be overridden' do
+      context = double :context
+      ActiveEvent::Context.current = context
+
+      ActiveEvent::Context.current == context
+    end
   end
 end

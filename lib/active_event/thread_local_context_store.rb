@@ -1,5 +1,5 @@
 module ActiveEvent
-  class ThreadLocalContextFactory
+  class ThreadLocalContextStore
     def current_context=(context)
       Thread.current[:active_event_context] = context
     end

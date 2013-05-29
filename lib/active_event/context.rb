@@ -1,18 +1,22 @@
-require 'active_event/thread_local_context_factory'
+require 'active_event/thread_local_context_store'
 
 module ActiveEvent
   class Context
-    attr_reader :factory
-    def self.factory
-      @factory ||= ThreadLocalContextFactory.new
+    attr_reader :store
+    def self.store
+      @store ||= ThreadLocalContextStore.new
     end
 
     def self.current
-      factory.current_context
+      store.current_context
+    end
+
+    def self.current=(context)
+      store.current_context = context
     end
 
     def self.reset!
-      factory.current_context = nil
+      store.current_context = nil
     end
 
     def event_map
