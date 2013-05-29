@@ -1,7 +1,7 @@
 module ActiveEvent
-  class HandlerContext
+  class Context
     def self.current
-      @current ||= HandlerContext.new
+      @current ||= Context.new
     end
 
     def event_map

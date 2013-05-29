@@ -1,8 +1,8 @@
 require 'spec_helper'
 require 'active_event/handler_context'
 
-describe ActiveEvent::HandlerContext do
-  let(:context) { ActiveEvent::HandlerContext.new }
+describe ActiveEvent::Context do
+  let(:context) { ActiveEvent::Context.new }
   let(:handler) { double(:handler, events_handled: [:my_event]).as_null_object }
 
   it 'maps published events to handlers' do
