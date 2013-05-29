@@ -11,6 +11,10 @@ module ActiveEvent
       factory.current_context
     end
 
+    def self.reset!
+      factory.current_context = nil
+    end
+
     def event_map
       @event_map ||= Hash.new { |h, k| h[k] = Set.new }
     end

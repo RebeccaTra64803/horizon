@@ -23,10 +23,18 @@ describe ActiveEvent::Context do
 
   it 'defaults to dispatching thread local contexts' do
     context = ActiveEvent::Context.current
+
     ActiveEvent::Context.current.should == context
-
     thread = Thread.new { ActiveEvent::Context.current.should_not == context }
-
     thread.join
+  end
+
+  it 'can reset the current context' do
+    context = ActiveEvent::Context.current
+
+    ActiveEvent::Context.reset!
+
+    ActiveEvent::Context.current.should be
+    ActiveEvent::Context.current.should_not == context
   end
 end
