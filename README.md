@@ -1,6 +1,6 @@
 # Activeevent
 
-TODO: Write a gem description
+Add domain events to your models.
 
 ## Installation
 
@@ -18,7 +18,43 @@ Or install it yourself as:
 
 ## Usage
 
-TODO: Write usage instructions here
+First, publish some domain events:
+
+```ruby
+class Dog < ActiveRecord::Base
+  include ActiveEvent::Publisher
+
+  def feed
+    self.hungry = false
+    publish :dog_fed, self
+  end
+end
+```
+
+Then, handle them:
+
+```ruby
+class DogOwnerNotifier
+  include ActiveEvent::Handler
+
+  def dog_fed(dog)
+    mail_owner(dog)
+  end
+  handle :dog_fed
+
+  # or
+
+  handle :dog_fed do |dog|
+    mail_owner(dog)
+  end
+
+  # or
+
+  handle dog_fed: :mail_owner
+
+  # ...
+end
+```
 
 ## Contributing
 
