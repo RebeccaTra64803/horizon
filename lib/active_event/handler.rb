@@ -18,16 +18,18 @@ module ActiveEvent
       end
     end
 
+    def events_handled
+      self.class.events_handled
+    end
+
     def handlers
       @handlers ||= curry_handlers
     end
 
-    def curry_handlers
-      Hash[
-        self.class.handlers.map { |event, lambdas|
-          [event, lambdas.map { |l| lambda { |*args| l.call self, *args } }]
-        }
-      ]
+    def handle(event, *args)
+      self.class.handlers[event].each do |handler|
+        handler.call self, *args
+      end
     end
   end
 end
