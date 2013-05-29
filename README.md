@@ -40,17 +40,17 @@ class DogOwnerNotifier
   def dog_fed(dog)
     mail_owner(dog)
   end
-  handle :dog_fed
+  handler :dog_fed
 
   # or
 
-  handle :dog_fed do |dog|
+  handler :dog_fed do |dog|
     mail_owner(dog)
   end
 
   # or
 
-  handle dog_fed: :mail_owner
+  handler dog_fed: :mail_owner
 
   # ...
 end

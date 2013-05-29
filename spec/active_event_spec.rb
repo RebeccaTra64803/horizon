@@ -19,9 +19,28 @@ describe "active_event" do
     end
   end
 
-  it "helps you publish domain events" do
-    dog = Dog.new
+  class DogOwnerNotifier
+    include ActiveEvent::Handler
 
+    def dog_fed(dog)
+      mail_owner(dog)
+    end
+    handler :dog_fed
+
+    def mail_owner
+    end
+  end
+
+  it "lets you publish and handle domain events" do
+    context = ActiveEvent::Context.current
+    handler = DogOwnerNotifier.new
+    context.add_handler handler
+
+    handler.stub(:mail_owner)
+
+    dog = Dog.new
     dog.feed
+
+    handler.should have_received(:mail_owner).with(dog)
   end
 end
