@@ -1,6 +1,6 @@
-require 'active_event/thread_local_context_store'
+require 'horizon/thread_local_context_store'
 
-module ActiveEvent
+module Horizon
   class Context
     attr_reader :store
     def self.store

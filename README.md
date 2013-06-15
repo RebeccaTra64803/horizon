@@ -6,7 +6,7 @@ Add domain events to your models.
 
 Add this line to your application's Gemfile:
 
-    gem 'activeevent'
+    gem 'horizon'
 
 And then execute:
 
@@ -14,7 +14,7 @@ And then execute:
 
 Or install it yourself as:
 
-    $ gem install activeevent
+    $ gem install horizon
 
 ## Usage
 
@@ -22,7 +22,7 @@ First, publish some domain events:
 
 ```ruby
 class Dog < ActiveRecord::Base
-  include ActiveEvent::Publisher
+  include Horizon::Publisher
 
   def feed
     self.hungry = false
@@ -35,7 +35,7 @@ Then, handle them:
 
 ```ruby
 class DogOwnerNotifier
-  include ActiveEvent::Handler
+  include Horizon::Handler
 
   def dog_fed(dog)
     mail_owner(dog)

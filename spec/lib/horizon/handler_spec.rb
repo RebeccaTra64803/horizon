@@ -1,9 +1,9 @@
 require 'spec_helper'
-require 'active_event/handler'
+require 'horizon/handler'
 
-describe ActiveEvent::Handler do
+describe Horizon::Handler do
   class MyHandler
-    include ActiveEvent::Handler
+    include Horizon::Handler
 
     def my_event; end
     handler :my_event

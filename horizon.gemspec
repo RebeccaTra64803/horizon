@@ -1,15 +1,15 @@
 # coding: utf-8
 lib = File.expand_path('../lib', __FILE__)
 $LOAD_PATH.unshift(lib) unless $LOAD_PATH.include?(lib)
-require 'active_event/version'
+require 'horizon/version'
 
 Gem::Specification.new do |spec|
-  spec.name          = "activeevent"
-  spec.version       = ActiveEvent::VERSION
+  spec.name          = "horizon"
+  spec.version       = Horizon::VERSION
   spec.authors       = ["Aaron Jensen"]
   spec.email         = ["aaronjensen@gmail.com"]
-  spec.description   = %q{activeevent}
-  spec.summary       = %q{activeevent}
+  spec.description   = %q{horizon}
+  spec.summary       = %q{horizon}
   spec.homepage      = ""
   spec.license       = "MIT"
 

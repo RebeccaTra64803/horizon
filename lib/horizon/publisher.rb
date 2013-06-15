@@ -1,12 +1,12 @@
 require 'active_support/concern'
-require 'active_event/context'
+require 'horizon/context'
 
-module ActiveEvent
+module Horizon
   module Publisher
     extend ActiveSupport::Concern
 
     def publish(event, *args)
-      ActiveEvent::Context.current.publish event, *args
+      Horizon::Context.current.publish event, *args
     end
   end
 end

@@ -1,9 +1,9 @@
 require 'spec_helper'
-require 'active_event'
+require 'horizon'
 
-describe "active_event" do
+describe "horizon" do
   class Dog
-    include ActiveEvent::Publisher
+    include Horizon::Publisher
     attr_accessor :hungry
     alias_method :hungry?, :hungry
 
@@ -20,7 +20,7 @@ describe "active_event" do
   end
 
   class DogOwnerNotifier
-    include ActiveEvent::Handler
+    include Horizon::Handler
 
     def dog_fed(dog)
       mail_owner(dog)
@@ -32,7 +32,7 @@ describe "active_event" do
   end
 
   it "lets you publish and handle domain events" do
-    context = ActiveEvent::Context.current
+    context = Horizon::Context.current
     handler = DogOwnerNotifier.new
     context.add_handler handler
 

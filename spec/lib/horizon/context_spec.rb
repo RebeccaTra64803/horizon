@@ -1,8 +1,8 @@
 require 'spec_helper'
-require 'active_event/context'
+require 'horizon/context'
 
-describe ActiveEvent::Context do
-  let(:context) { ActiveEvent::Context.new }
+describe Horizon::Context do
+  let(:context) { Horizon::Context.new }
   let(:handler) { double(:handler, events_handled: [:my_event]).as_null_object }
 
   it 'maps published events to handlers' do
@@ -23,27 +23,27 @@ describe ActiveEvent::Context do
 
   describe '.current' do
     it 'defaults to dispatching thread local contexts' do
-      context = ActiveEvent::Context.current
+      context = Horizon::Context.current
 
-      ActiveEvent::Context.current.should == context
-      thread = Thread.new { ActiveEvent::Context.current.should_not == context }
+      Horizon::Context.current.should == context
+      thread = Thread.new { Horizon::Context.current.should_not == context }
       thread.join
     end
 
     it 'can be reset' do
-      context = ActiveEvent::Context.current
+      context = Horizon::Context.current
 
-      ActiveEvent::Context.reset!
+      Horizon::Context.reset!
 
-      ActiveEvent::Context.current.should be
-      ActiveEvent::Context.current.should_not == context
+      Horizon::Context.current.should be
+      Horizon::Context.current.should_not == context
     end
 
     it 'can be overridden' do
       context = double :context
-      ActiveEvent::Context.current = context
+      Horizon::Context.current = context
 
-      ActiveEvent::Context.current == context
+      Horizon::Context.current == context
     end
   end
 end

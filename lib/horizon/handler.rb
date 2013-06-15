@@ -1,6 +1,6 @@
 require 'active_support/concern'
 
-module ActiveEvent
+module Horizon
   module Handler
     extend ActiveSupport::Concern
 

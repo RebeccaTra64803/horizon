@@ -1,15 +1,15 @@
 require 'spec_helper'
-require 'active_event/publisher'
+require 'horizon/publisher'
 
-describe ActiveEvent::Publisher do
+describe Horizon::Publisher do
   class MyPublisher
-    include ActiveEvent::Publisher
+    include Horizon::Publisher
   end
 
   it 'can publish events' do
     publisher = MyPublisher.new
     context = double(:context).as_null_object
-    ActiveEvent::Context.current = context
+    Horizon::Context.current = context
 
     publisher.publish(:my_event, 4)
     context.should have_received(:publish).with(:my_event, 4)
