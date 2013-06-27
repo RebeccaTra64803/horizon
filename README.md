@@ -1,4 +1,4 @@
-# Activeevent
+# Horizon
 
 Add domain events to your models.
 
